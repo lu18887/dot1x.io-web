@@ -5,7 +5,6 @@ date = 2019-06-28T15:22:39+08:00
 weight = 20
 draft = false
 +++
-
 # IEEE-802.1X-2001-brief
 [TOC]
 ##  0.前言
@@ -114,7 +113,126 @@ management action (8.4.9, 8.5.5, and 9.4.1)==
 authentication, and support the ability to modify the KeyTransmissionEnabled parameter by
 management action (8.4.9, 8.5.6, and 9.4.1)==
 ## 6.Principles of operation
+### 6.1 System,Ports, and system roles
+接入LAN的设备对应此标准的System,接入LAN的点对应此标准的Ports。
+为了完成访问控制，分为3种角色，Authenticator Port、Supplicant Port、Authentication  server。
+1. Authenticator Port角色 需要认证通过之后才能允许提供服务
+2. Supplicant Port角色 需要使用Authenticator提供服务
+3. Authentication  server 根据Supplicant以及Authenticator提供的信息判断是否认证通过
+
+### 6.2 PAE
+1. Supplicant PAE：在认证过程中为Supplicant Port角色，响应Authenticator的认证请求
+2. Authenticator PAE:在认证过程中为Authenticator Port角色，与Supplicant通讯并将Supplicant提供的认证数据提交给Authentication Server，以及维护Supplicant的认证状态
+
+
+## 6.3 Controlled and uncontrolled access
+为了完成端口级别的访问控制，在实体接入点上虚拟出2个不同的虚拟接入点，一个接入点在任何认证状态下都允许数据包通过称为uncontrolled Port,另一个接入点只有在认证通过的前提下才能放通数据包称为controlled  Port。uncontrolled port能收到实体接入点收到的所有数据帧，controlled port则只能在认证通过的情况下收到。
+
+图示如下：
+
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/ieee-802.1x-2001-f6-1.png?raw=true)
+
+下方为LAN，上方为Authenticator System通常为交换机等</br>
+
+下图展示在端口在不同认证状态下的情况(假定OperControlledDirections设置为both),
+AuthControlledPortStatus是controlled port的认证状态，可能的值为unauthorized以及authorized
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/ieee-802.1x-2001-f6-2.png?raw=true)
+
+AuthControlledPortControl参数：取值为ForceUnauthorized、ForceAuthorized、Auto，当此参数为ForceUnauthorized时Authenticator PAE状态机将controlled port设置成unauthorized状态,当此参数为ForceAuthorized时Authenticator PAE状态机将controlled port设置成authorized,当此参数为Auto时Authenticator PAE状态机根据具体的认证状态设置。
+
+SystemAuthControl参数：认证的总开关,当为Enable时端口的认证状态根据AuthControlledPortControl参数的值决定，当为Diabled时端口的状态与AuthControlledPortControl设置为ForceAuthorized效果一样。
+
+访问LAN受到MAC状态（包括管理状态以及操作状态)以及AuthControlledPortStatus的制约，如果MAC状态不正常则没有任何数据包可以通过包括controlled port以及uncontrolled port。当MAC状态为Disabled时，端口的状态也会变成unauthorized。如下图:</br>
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/ieee-802.1x-2001-f6-3.png?raw=true)
+
+**Authenticator PAE与untrolled port的结合**</br>
+Authenticator PAE可以使用controlled port或者uncontrolled port完成认证，使用controlled port需要额外的端口或者网卡,使用uncontrolled port是不错的选择，如下图：</br>
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/ieee-802.1x-2001-f6-4.png?raw=true)
+
+更复杂的结构如下：</br>
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/ieee-802.1x-2001-f6-5.png?raw=true)
+终端在桥接网络中，网络设备在桥接网络的边缘，Authenticator PAE通过桥接网络与Supplicant PAE使用EAPOL进行交互，Authenticator PAE使用EAP或者EAP封装在其他协议中与Authentication Server进行交互
+
+更更复杂的结构如下：</br>
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/ieee-802.1x-2001-f6-6.png?raw=true)
+
+Authenticator System A需要使用 Authenticator System B提供的服务，Authenticator System B需要使用Authenticator System A使用的服务，比如2个网桥，则端口需要同时具备Authenticator PAE与Supplicant PAE角色
+
+### 6.4 单向控制与双向控制
+contolled port 在unauthorized状态下会阻断哪些方向的数据包受到AdminControlledDirections以及OperationalControlledDirections的控制，这两个参数的值为both 或者in ，both 代表发送和接收都受到控制，in代表接收受到控制。声明满足此标准的设备需要支持针对每个端口设置AdminControlledDirections为both，支持针对单个端口设置AdminControlledDirections参数为in是可选项。OperationalControlledDirections由Controlled Directions状态机维护。</br>
+**Question**: Why we need this?</br>
+**Answer**: Wake-on-lan等功能需要网络设备给终端发包，但是不需要终端回包等场景
+
+### 6.5 802.1X与802.3AD
+802.1X应用在物理端口上，处于Unauthorized状态的端口不可加入聚合端口。加入聚合端口的物理端口在变成Unauthorized状态之前应撤销聚合端口
+
+
 ## 7.EAPOL
+本部分包含EAP在LAN环境(包括802.3以太网以及环令牌网以及FDDI)下的封装以及传输。
+这里只介绍802.3以太网下的EAPOL结构。
+
+### 7.1 EAPOL以太网帧结构
+包结构如下图：</br>
+![avatar](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/eapol_packet_f1.png?raw=true)
+
+
+            
+
+
+字段名称 | 字段说明|
+---------|---------|
+PAE以太网类型|0x888E|
+协议版本|802.1X-2001为0x01</br>802.1X-2004为0x02</br>802.1X-2010为0x03</br>|
+包类型|0x00 EAP-PACKET</br> 0x01 EAPOL-START</br>0x02 EAPOL-LOGOFF</br>0x03 EAPOL-KEY</br>0x04 EAPOL-Encapsulated-ASF-Alert|
+
+
+### 7.2 EAPOL与tagging
+EAPOL帧不进行VLAN标记，但支持802.1Q优先级标记。
+
+### 7.3 EAPOL帧的校验以及版本号处理
+1. 校验规则
+    - 1.1 目的MAC地址是01-80-C2-00-00-03或==单播MAC地址==
+    - 1.2 PAE以太网帧类型字段是0x888e
+    - 1.3 包类型是EAP-Packet, EAPOL-Start, EAPOL-Logoff, or
+EAPOL-Key
+2. 协议版本校验规则
+    - 2.1 向下兼容原则
+    - 2.2 包含低版本未定义的包类型的数据包会被忽略
+    - 2.3 字段大小以及类型超过低版本定义的字段大小和类型的会被忽略
+
+### 7.4 EAP-KEY BODY格式
+![](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/eapol_packet_f2.png?raw=true)
+
+具体的包字段解析这里暂不展开
+
+### 7.5 EAP-PACKET BODY格式
+![](https://github.com/lu18887/dot1x.io-web/blob/master/resources/img/EAP-PACKET-f1.png?raw=true)
+
+#### 7.5.1 Code取值及含义
+code的取值与含义如下:</br>
+值|含义|
+----|---|
+1|EAP请求包|
+2|EAP应答包|
+3|EAP认证成功包|
+4|EAP认证失败包|
+
+#### 7.5.2 ID的取值范围及用途
+ID的长度是1字节，最大值是256，端口+ID用于标志报文的唯一性，同一次EAP交互中请求与应答共用一个ID
+
+#### 7.5.3 长度
+长度计算包含整个BODY，EAPOL工作在数据链路层，包大小受到MTU的限制，在不允许分片的情况下请注意不要超过网络环节中的最小MTU。
+
+#### 7.6 EAPOL的源目MAC地址
+1. EAPOL帧在Supplicant以及Authenticator中传输
+2. EAP包在Authenticator与Authentication Server之间传输
+
+EAPOL帧的目的MAC地址有以下情况：</br>
+1. 知道对端MAC地址的情况目的MAC地址为对端的MAC地址
+2. 不知道对端MAC地址的情况目的MAC地址为01-80-C2-00-00-03
+
+EAPOL帧的源MAC地址为本端的MAC地址
+
 ## 8.Port Access Control
 ## 9.Management of port access control
 ## 10.Management protocol
