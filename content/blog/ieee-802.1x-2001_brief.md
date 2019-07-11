@@ -629,7 +629,7 @@ Supplicant PAE状态机有以下几种状态：</br>
 管理对象与MIB节点的对应关系如下：</br>
 
 **本文中列举的管理对象**|**MIB节点**|
---|--|
+---|---|
 **9.3系统配置**|**dot1xPaeSystem**|
 Port number |dot1xPaePortNumber (table index)|
 SystemAuthControl |dot1xPaeSystemAuthControl|
