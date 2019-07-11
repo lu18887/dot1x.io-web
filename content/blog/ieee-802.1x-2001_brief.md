@@ -702,7 +702,7 @@ authPeriod |dot1xSuppAuthPeriod|
 startPeriod |dot1xSuppStartPeriod|
 maxStart |dot1xSuppMaxStart|
 **Supplicant统计**|**dot1xSuppStatsTable**|
-Port number dot1xPaePortNumber (table index)|
+Port number |dot1xPaePortNumber (table index)|
 EAPOL frames received |dot1xSuppEapolFramesRx|
 EAPOL frames transmitted |dot1xSuppEapolFramesTx|
 EAPOL Start frames transmitted |dot1xSuppEapolStartFramesTx|
