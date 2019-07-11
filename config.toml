@@ -4,6 +4,8 @@ title = "DOT1X.io"
 theme = "kube"
 description = ""
 Paginate = 4
+googleAnalytics = "UA-143674438-1"
+
 [Params]
   RSSLink = "/index.xml"
   author = "newpixcom" # add your company name
