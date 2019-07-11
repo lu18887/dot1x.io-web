@@ -628,93 +628,93 @@ Supplicant PAE状态机有以下几种状态：</br>
 这里的Port number对应RFC 2863中的IFINDEX
 管理对象与MIB节点的对应关系如下：</br>
 
-**本文中列举的管理对象**|**MIB节点**|
----|---|
-**9.3系统配置**|**dot1xPaeSystem**|
-Port number |dot1xPaePortNumber (table index)|
-SystemAuthControl |dot1xPaeSystemAuthControl|
-Protocol version |dot1xPaePortProtocolVersion|
-PAE capabilities |dot1xPaePortCapabilities|
-Initialize Port |dot1xPaePortInitialize|
-**9.1.1 Authenticator PAE配置与管理对象**|**dot1xAuthConfigTable**|
-Port number |dot1xPaePortNumber (table index)|
-Authenticator PAE State| dot1xAuthPaeState|
-Backend Authentication State|dot1xAuthBackendAuthState|
-AdminControlledDirections |dot1xAuthAdminControlledDirections|
-OperControlledDirections |dot1xAuthOperControlledDirections|
-AuthControlledPortStatus |dot1xAuthAuthControlledPortStatus|
-AuthControlledPortControl |dot1xAuthAuthControlledPortControl|
-quietPeriod |dot1xAuthQuietPeriod|
-txPeriod |dot1xAuthTxPeriod|
-suppTimeout |dot1xAuthSuppTimeout|
-serverTimeout |dot1xAuthServerTimeout|
-maxReq |dot1xAuthMaxReq|
-reAuthPeriod |dot1xAuthReAuthPeriod|
-reAuthEnabled |dot1xAuthReAuthEnabled|
-KeyTransmissionEnabled |dot1xAuthKeyTxEnabled|
-Reauthenticate |dot1xPaePortReauthenticate|
-**Authenticator统计管理对象**|**dot1xAuthStatsTable**|
-Port number |dot1xPaePortNumber (table index)|
-EAPOL frames received |dot1xAuthEapolFramesRx|
-EAPOL frames transmitted |dot1xAuthEapolFramesTx|
-EAPOL Start frames received |dot1xAuthEapolStartFramesRx|
-EAPOL Logoff frames received |dot1xAuthEapolLogoffFramesRx|
-EAP Resp/Id frames received |dot1xAuthEapolRespIdFramesRx|
-EAP Response frames received |dot1xAuthEapolRespFramesRx|
-EAP Req/Id frames transmitted |dot1xAuthEapolReqIdFramesTx|
-EAP Request frames transmitted |dot1xAuthEapolReqFramesTx|
-Invalid EAPOL frames received |dot1xAuthInvalidEapolFramesRx|
-EAP length error frames received |dot1xAuthEapLengthErrorFramesRx|
-Last EAPOL frame version |dot1xAuthLastEapolFrameVersion|
-Last EAPOL frame source |dot1xAuthLastEapolFrameSource|
-**Authenticator诊断管理对象**|**dot1xAuthDiagTable**|
-authEntersConnecting |dot1xAuthEntersConnecting|
-authEapLogoffsWhileConnecting |dot1xAuthEapLogoffsWhileConnecting|
-authEntersAutheniticating |dot1xAuthEntersAuthenticating|
-authAuthSuccessWhileAuthenticating |dot1xAuthAuthSuccessWhileAuthenticating|
-authAuthTimeoutsWhileAuthenticating |dot1xAuthAuthTimeoutsWhileAuthenticating|
-authAuthFailWhileAuthenticating |dot1xAuthAuthFailWhileAuthenticating|
-authAuthReauthsWhileAuthenticating |dot1xAuthAuthReauthsWhileAuthenticating|
-authAuthEapStartsWhileAuthenticating |dot1xAuthAuthEapStartsWhileAuthenticating|
-authAuthLogoffWhileAuthenticating |dot1xAuthAuthEapLogoffWhileAuthenticating|
-authAuthReauthsWhileAuthenticated |dot1xAuthAuthReauthsWhileAuthenticated|
-authAuthEapStartsWhileAuthenticated |dot1xAuthAuthEapStartsWhileAuthenticated|
-authAuthLogoffWhileAuthenticated |dot1xAuthAuthEapLogoffWhileAuthenticated|
-backendResponses |dot1xAuthBackendResponses|
-backendAccessChallenges |dot1xAuthBackendAccessChallenges|
-backendOtherRequestsToSupplicant |dot1xAuthBackendOtherRequestsToSupplicant|
-backendNonNakResponsesFromSupplicant |dot1xAuthBackendNonNakResponsesFromSupplicant|
-backendAuthSuccesses |dot1xAuthBackendAuthSuccesses|
-backendAuthFails |dot1xAuthBackendAuthFails|
-**Authenticator会话统计管理对象**|**dot1xAuthSessionStatsTable**|
-Port number |dot1xPaePortNumber (table index)|
-Session Octets Received |dot1xAuthSessionOctetsRx|
-Session Octets Transmitted |dot1xAuthSessionOctetsTx|
-Session Frames Received |dot1xAuthSessionFramesRx|
-Session Frames Transmitted |dot1xAuthSessionFramesTx|
-Session Identifier |dot1xAuthSessionId|
-Session Authentication Method |dot1xAuthSessionAuthenticMethod|
-Session Time |dot1xAuthSessionTime|
-Session Terminate Cause |dot1xAuthSessionTerminateCause|
-Session User Name |dot1xAuthSessionUserName|
-**Supplicant配置**|**dot1xSuppConfigTable**|
-Port number |dot1xPaePortNumber (table index)|
-Supplicant PAE State |dot1xSuppPaeState|
-heldPeriod |dot1xSuppHeldPeriod|
-authPeriod |dot1xSuppAuthPeriod|
-startPeriod |dot1xSuppStartPeriod|
-maxStart |dot1xSuppMaxStart|
-**Supplicant统计**|**dot1xSuppStatsTable**|
-Port number |dot1xPaePortNumber (table index)|
-EAPOL frames received |dot1xSuppEapolFramesRx|
-EAPOL frames transmitted |dot1xSuppEapolFramesTx|
-EAPOL Start frames transmitted |dot1xSuppEapolStartFramesTx|
-EAPOL Logoff frames transmitted |dot1xSuppEapolLogoffFramesTx|
-EAP Resp/Id frames transmitted |dot1xSuppEapolRespIdFramesTx|
-EAP Response frames transmitted |dot1xSuppEapolRespFramesTx|
-EAP Req/Id frames received |dot1xSuppEapolReqIdFramesRx|
-EAP Request frames received |dot1xSuppEapolReqFramesRx|
-Invalid EAPOL frames received |dot1xSuppInvalidEapolFramesRx|
-EAP length error frames received |dot1xSuppEapLengthErrorFramesRx|
-Last EAPOL frame version |dot1xSuppLastEapolFrameVersion|
-Last EAPOL frame source |dot1xSuppLastEapolFrameSource|
+|**本文中列举的管理对象**|**MIB节点**|
+|---|---|
+|**9.3系统配置**|**dot1xPaeSystem**|
+|Port number |dot1xPaePortNumber (table index)|
+|SystemAuthControl |dot1xPaeSystemAuthControl|
+|Protocol version |dot1xPaePortProtocolVersion|
+|PAE capabilities |dot1xPaePortCapabilities|
+|Initialize Port |dot1xPaePortInitialize|
+|**9.1.1 Authenticator PAE配置与管理对象**|**dot1xAuthConfigTable**|
+|Port number |dot1xPaePortNumber (table index)|
+|Authenticator PAE State| dot1xAuthPaeState|
+|Backend Authentication State|dot1xAuthBackendAuthState|
+|AdminControlledDirections |dot1xAuthAdminControlledDirections|
+|OperControlledDirections |dot1xAuthOperControlledDirections|
+|AuthControlledPortStatus |dot1xAuthAuthControlledPortStatus|
+|AuthControlledPortControl |dot1xAuthAuthControlledPortControl|
+|quietPeriod |dot1xAuthQuietPeriod|
+|txPeriod |dot1xAuthTxPeriod|
+|suppTimeout |dot1xAuthSuppTimeout|
+|serverTimeout |dot1xAuthServerTimeout|
+|maxReq |dot1xAuthMaxReq|
+|reAuthPeriod |dot1xAuthReAuthPeriod|
+|reAuthEnabled |dot1xAuthReAuthEnabled|
+|KeyTransmissionEnabled |dot1xAuthKeyTxEnabled|
+|Reauthenticate |dot1xPaePortReauthenticate|
+|**Authenticator统计管理对象**|**dot1xAuthStatsTable**|
+|Port number |dot1xPaePortNumber (table index)|
+|EAPOL frames received |dot1xAuthEapolFramesRx|
+|EAPOL frames transmitted |dot1xAuthEapolFramesTx|
+|EAPOL Start frames received |dot1xAuthEapolStartFramesRx|
+|EAPOL Logoff frames received |dot1xAuthEapolLogoffFramesRx|
+|EAP Resp/Id frames received |dot1xAuthEapolRespIdFramesRx|
+|EAP Response frames received |dot1xAuthEapolRespFramesRx|
+|EAP Req/Id frames transmitted |dot1xAuthEapolReqIdFramesTx|
+|EAP Request frames transmitted |dot1xAuthEapolReqFramesTx|
+|Invalid EAPOL frames received |dot1xAuthInvalidEapolFramesRx|
+|EAP length error frames received |dot1xAuthEapLengthErrorFramesRx|
+|Last EAPOL frame version |dot1xAuthLastEapolFrameVersion|
+|Last EAPOL frame source |dot1xAuthLastEapolFrameSource|
+|**Authenticator诊断管理对象**|**dot1xAuthDiagTable**|
+|authEntersConnecting |dot1xAuthEntersConnecting|
+|authEapLogoffsWhileConnecting |dot1xAuthEapLogoffsWhileConnecting|
+|authEntersAutheniticating |dot1xAuthEntersAuthenticating|
+|authAuthSuccessWhileAuthenticating |dot1xAuthAuthSuccessWhileAuthenticating|
+|authAuthTimeoutsWhileAuthenticating |dot1xAuthAuthTimeoutsWhileAuthenticating|
+|authAuthFailWhileAuthenticating |dot1xAuthAuthFailWhileAuthenticating|
+|authAuthReauthsWhileAuthenticating |dot1xAuthAuthReauthsWhileAuthenticating|
+|authAuthEapStartsWhileAuthenticating |dot1xAuthAuthEapStartsWhileAuthenticating|
+|authAuthLogoffWhileAuthenticating |dot1xAuthAuthEapLogoffWhileAuthenticating|
+|authAuthReauthsWhileAuthenticated |dot1xAuthAuthReauthsWhileAuthenticated|
+|authAuthEapStartsWhileAuthenticated |dot1xAuthAuthEapStartsWhileAuthenticated|
+|authAuthLogoffWhileAuthenticated |dot1xAuthAuthEapLogoffWhileAuthenticated|
+|backendResponses |dot1xAuthBackendResponses|
+|backendAccessChallenges |dot1xAuthBackendAccessChallenges|
+|backendOtherRequestsToSupplicant |dot1xAuthBackendOtherRequestsToSupplicant|
+|backendNonNakResponsesFromSupplicant |dot1xAuthBackendNonNakResponsesFromSupplicant|
+|backendAuthSuccesses |dot1xAuthBackendAuthSuccesses|
+|backendAuthFails |dot1xAuthBackendAuthFails|
+|**Authenticator会话统计管理对象**|**dot1xAuthSessionStatsTable**|
+|Port number |dot1xPaePortNumber (table index)|
+|Session Octets Received |dot1xAuthSessionOctetsRx|
+|Session Octets Transmitted |dot1xAuthSessionOctetsTx|
+|Session Frames Received |dot1xAuthSessionFramesRx|
+|Session Frames Transmitted |dot1xAuthSessionFramesTx|
+|Session Identifier |dot1xAuthSessionId|
+|Session Authentication Method |dot1xAuthSessionAuthenticMethod|
+|Session Time |dot1xAuthSessionTime|
+|Session Terminate Cause |dot1xAuthSessionTerminateCause|
+|Session User Name |dot1xAuthSessionUserName|
+|**Supplicant配置**|**dot1xSuppConfigTable**|
+|Port number |dot1xPaePortNumber (table index)|
+|Supplicant PAE State |dot1xSuppPaeState|
+|heldPeriod |dot1xSuppHeldPeriod|
+|authPeriod |dot1xSuppAuthPeriod|
+|startPeriod |dot1xSuppStartPeriod|
+|maxStart |dot1xSuppMaxStart|
+|**Supplicant统计**|**dot1xSuppStatsTable**|
+|Port number |dot1xPaePortNumber (table index)|
+|EAPOL frames received |dot1xSuppEapolFramesRx|
+|EAPOL frames transmitted |dot1xSuppEapolFramesTx|
+|EAPOL Start frames transmitted |dot1xSuppEapolStartFramesTx|
+|EAPOL Logoff frames transmitted |dot1xSuppEapolLogoffFramesTx|
+|EAP Resp/Id frames transmitted |dot1xSuppEapolRespIdFramesTx|
+|EAP Response frames transmitted |dot1xSuppEapolRespFramesTx|
+|EAP Req/Id frames received |dot1xSuppEapolReqIdFramesRx|
+|EAP Request frames received |dot1xSuppEapolReqFramesRx|
+|Invalid EAPOL frames received |dot1xSuppInvalidEapolFramesRx|
+|EAP length error frames received |dot1xSuppEapLengthErrorFramesRx|
+|Last EAPOL frame version |dot1xSuppLastEapolFrameVersion|
+|Last EAPOL frame source |dot1xSuppLastEapolFrameSource|
