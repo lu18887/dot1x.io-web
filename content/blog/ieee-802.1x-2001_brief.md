@@ -387,9 +387,9 @@ Authenticator PAE有以下9种状态：</br>
 **说明**：</br>
 1. 因为重认证或者EAPOL-Start从AUTHENTICATED状态到CONNECTING状态时端口的认证状态可以是Authorized
 2. AUTHENTICATING状态将authStart设置为TRUE，后端认证状态机检测到authStart为TRUE则开始工作。根据后端认证状态机的结果有三种情况，authTimeout、authFail、authSuccess。
-3. 
 
 Authenticator PAE状态机维护的一些数据:</br>
+
 变量名|解释|
 ---|---|
 authEntersConnecting|进入CONNECTING状态的次数|
