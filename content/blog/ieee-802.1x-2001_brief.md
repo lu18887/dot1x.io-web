@@ -291,8 +291,9 @@ EAPOL支持Supplicant与Authenticator之间在认证完成之后传输全局密�
 8. 密钥接收状态机
 
 这些状态机都是端口独立的，这些状态机是针对具体的角色而言的，以下表格列出了状态机适用的端口角色（X代表必须支持，O代表可选支持)</br>
+
 状态机名称|Authenticator|Supplicant|Both|
-------|-----|----|---|
+------|-----|----|----|
 端口定时器状态机|X|X|X|
 Authenticator PAE状态机|X||X|
 Authenticator 密钥传输状态机|O||O|
@@ -442,6 +443,7 @@ authAuthEapLogoffWhileAuthenticated|由于收到EAPOL-Logoff从AUTHENTICATED转�
 5. **abortAuth** 后端认证状态机释放资源等动作
 
 后端认证状态机维护的一些数据:</br>
+
 变量名|解释|
 ---|---|
 backendResponses|后端认证状态机发送给Authentication Server的Access-Request包的次数|
@@ -624,9 +626,8 @@ Supplicant PAE状态机有以下几种状态：</br>
 
 这里的Port number对应RFC 2863中的IFINDEX
 管理对象与MIB节点的对应关系如下：</br>
-
 **本文中列举的管理对象**|**MIB节点**|
----|---|
+--|--|
 **9.3系统配置**|**dot1xPaeSystem**|
 Port number |dot1xPaePortNumber (table index)|
 SystemAuthControl |dot1xPaeSystemAuthControl|
