@@ -943,6 +943,15 @@ IN: eapReqData (includes reqId)
 ## 8 RADIUS
 RADIUS是Remote Authentication Dial In User Service的简称，其使用的传输层协议使用的是UDP，默认端口是1812，是一种C/S模式的安全可扩展的认证协议。其使用的共享密钥不在网络中进行传输，这样可以保证密钥不被轻易的抓取和破解，增加RADIUS字段并不需要修改RADIUS协议本身。RADIUS是AAA中常用的协议。
 
+RADIUS是Remote Authentication Dial In User Service的简称，其使用的传输层协议使用的是UDP，默认端口是1812，是一种C/S模式的安全可扩展的认证协议。其使用的共享密钥不在网络中进行传输，这样可以保证密钥不被轻易的抓取和破解，增加RADIUS字段并不需要修改RADIUS协议本身。RADIUS是AAA中常用的协议。
+RADIUS涉及的组件如下：
+|组件名称|功能|举例|
+|---|---|---|
+|用户/设备|请求访问网络|笔记本电脑|
+|Network Access Server(NAS)|提供对用户/设备提供网络服务|LAN交换机<<br />无线AP|
+|认证服务器|接受NAS的认证请求，并响应NAS的认证请求。为了完成认证以及计费等过程，可能需要访问用户存储|FreeRADIUS<br />NPS<br />IAS|
+|用户数据存储|保存用户的数据以及配置|SQL数据库<br />LDAP服务器<br />AD域服务器|
+
 ### 8.1 RADIUS报文结构
 
 ```
